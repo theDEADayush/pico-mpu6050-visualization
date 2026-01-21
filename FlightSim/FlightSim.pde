@@ -5,9 +5,7 @@ float roll, pitch, yaw;
 
 void setup() {
   size(1000, 800, P3D);
-  smooth(8); // Anti-aliasing for smooth edges
-  
-  // DEBUG: Print ports to console
+  smooth(8);
   printArray(Serial.list());
   
   try {
@@ -22,15 +20,15 @@ void setup() {
 }
 
 void draw() {
-  // 1. Black Background
+ 
   background(0);
   
-  // Lighting
+
   lights();
   directionalLight(255, 255, 255, -1, 1, -1);
   spotLight(255, 255, 255, width/2, height/2, 400, 0, 0, -1, PI/4, 2);
   
-  // HUD Text
+ 
   hint(DISABLE_DEPTH_TEST); 
   camera(); 
   noLights();
@@ -43,8 +41,7 @@ void draw() {
   
   translate(width/2, height/2, 0); 
   
-  // --- ROTATION MAPPING ---
-  // Reversed Pitch (-pitch) for correct flight controls
+
   rotateX(radians(-pitch)); 
   rotateZ(radians(roll));  
   rotateY(radians(yaw));   
@@ -55,32 +52,31 @@ void draw() {
 void drawPlane() {
   noStroke();
   
-  // Body
+  
   fill(150);
   box(60, 60, 300); 
   
-  // Cockpit (Glowing Cyan)
   pushMatrix();
   translate(0, -30, 80);
   fill(0, 255, 255, 200); 
   box(40, 20, 80);
   popMatrix();
   
-  // Wings
+
   pushMatrix();
   translate(0, 0, 50);
   fill(100);
   box(450, 10, 80); 
   popMatrix();
   
-  // Tail Vertical
+ 
   pushMatrix();
   translate(0, -40, -120);
   fill(200, 0, 0); 
   box(10, 80, 50);
   popMatrix();
   
-  // Tail Horizontal
+ 
   pushMatrix();
   translate(0, 0, -120);
   fill(100);
